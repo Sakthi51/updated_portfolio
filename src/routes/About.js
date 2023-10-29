@@ -1,61 +1,63 @@
-import React, {useState, useEffect}from 'react';
+import React, { useState, useEffect } from 'react';
 
 var drawer = false;
 
 
-function About(){
-    
+function About() {
+
     const [DrawerSlide, setDrawerSlide] = useState("DrawerHiddenInitial")
     const [DrawerBG, setDrawerBG] = useState("DrawerBGHidden");
     const [toggle, setToggle] = useState(false);
     const [navBar, setNavBar] = useState("NavBar");
 
-    function DrawerManager(){
-        if (drawer){
-            if (localStorage.getItem('Theme')==="true"){
-                drawer=false;
+    function DrawerManager() {
+        if (drawer) {
+            if (localStorage.getItem('Theme') === "true") {
+                drawer = false;
                 setDrawerSlide("DrawerHidden-Dark");
                 setDrawerBG("DrawerBGHidden");
             }
-            else{
-                drawer=false;
+            else {
+                drawer = false;
                 setDrawerSlide("DrawerHidden");
                 setDrawerBG("DrawerBGHidden");
             }
         }
-        else{
-            if (localStorage.getItem('Theme')==="true"){
-            drawer=true;
-            setDrawerSlide("Drawer-Dark");
-            setDrawerBG("DrawerBG");
-        }
-        else{
-            drawer=true;
-            setDrawerSlide("Drawer");
-            setDrawerBG("DrawerBG");
-        }
+        else {
+            if (localStorage.getItem('Theme') === "true") {
+                drawer = true;
+                setDrawerSlide("Drawer-Dark");
+                setDrawerBG("DrawerBG");
+            }
+            else {
+                drawer = true;
+                setDrawerSlide("Drawer");
+                setDrawerBG("DrawerBG");
+            }
         }
     }
-    useEffect(()=>{if (localStorage.getItem('Theme')==="true"){
+    useEffect(() => {
+        if (localStorage.getItem('Theme') === "true") {
             setToggle(true);
             setNavBar("NavBar-Dark");
-    }},[]);
-    function ModeManager(){
-        if (localStorage.getItem('Theme')==="true"){
+        }
+    }, []);
+    function ModeManager() {
+        if (localStorage.getItem('Theme') === "true") {
             setToggle(false);
             localStorage.setItem('Theme', 'false')
             document.body.classList.remove('body');
             setNavBar("NavBar");
-            drawer=false;
+            drawer = false;
             setDrawerSlide("DrawerHidden");
             setDrawerBG("DrawerBGHidden");
         }
-        else{
+        else {
             localStorage.setItem('Theme', 'true');
             document.body.classList.add('body');
             setNavBar("NavBar-Dark");
             setToggle(true);
-            drawer=false;
+            drawer = false;
             setDrawerSlide("DrawerHidden-Dark");
             setDrawerBG("DrawerBGHidden");
         }
@@ -64,119 +66,130 @@ function About(){
 
 
 
-    function Drawer(){
-        return(
+    function Drawer() {
+        return (
             <div className={DrawerBG}>
                 <div className={DrawerBG} onClick={DrawerManager}>
                 </div>
                 <div className={DrawerSlide}>
-                    {'\n\n\n\n'} 
-                    <a href="/" style={{color: "#FF5555"}}>About </a>{'\n\n'}
-                    <a href = "/technology" >Technology </a>{'\n\n'}
-                    <a href = "/projects" >Projects </a>{'\n\n'}
-                    <a target="_blank" rel="noreferrer" href="https://manoj-writes.hashnode.dev/">Blog</a>{'\n\n'}
-                    <a target="_blank" href="https://drive.google.com/file/d/1ROYK9tE3kjzJhp-7a0i_chp0-mS-DVT2/view" rel="noreferrer">Resume</a>
-                    {'\n\n'}<hr style={{width: "80%", margin: "auto", opacity: "0.2"}} />{'\n'}
-                    <a target = "_blank" rel="noreferrer" href = "mailto:paramsetti.manoj@gmail.com"  >E-mail </a>{'\n\n'}
-                    <a target = "_blank" rel="noreferrer" href = "https://linkedin.com/in/manoj-paramsetti"  >LinkedIn </a>{'\n\n'}
-                    <a target = "_blank" rel="noreferrer" href = "https://discord.com/users/777906489498271765"  >Discord </a>{'\n\n'}
-                    <a target = "_blank" rel="noreferrer" href = "https://t.me/ManojParamsetti"  >Telegram </a>{'\n'}
+                    {'\n\n\n\n'}
+                    <a href="/" style={{ color: "#FF5555" }}>About </a>{'\n\n'}
+                    <a href="/technology" >Technology </a>{'\n\n'}
+                    <a href="/projects" >Projects </a>{'\n\n'}
+                    {/* <a target="_blank" rel="noreferrer" href="https://manoj-writes.hashnode.dev/">Blog</a>{'\n\n'} */}
+                    <a target="_blank" href="https://drive.google.com/file/d/1j0zNmUu0FVwwOqyrDeu5K3kAT9kdrW6j/view?usp=sharing">Resume</a>
+                    {'\n\n'}<hr style={{ width: "80%", margin: "auto", opacity: "0.2" }} />{'\n'}
+                    <a target="_blank" rel="noreferrer" href="mailto:sakthi1711231@gmail.com"  >E-mail </a>{'\n\n'}
+                    <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/sakthi-0654b821a/"  >LinkedIn </a>{'\n\n'}
+                    {/* <a target="_blank" rel="noreferrer" href="https://discord.com/users/777906489498271765"  >Discord </a>{'\n\n'} */}
+                    <a target="_blank" rel="noreferrer" href="#"  >Telegram </a>{'\n'}
                     {'\n'}<b>Dark Mode:</b><div class="toggleWrapper">
-                    <input type="checkbox" name="toggle2" checked={toggle} onClick={ModeManager} class="mobileToggle" id="toggle2" />
-                    <label for="toggle2"></label>
+                        <input type="checkbox" name="toggle2" checked={toggle} onClick={ModeManager} class="mobileToggle" id="toggle2" />
+                        <label for="toggle2"></label>
                     </div>
                 </div>
             </div>
         );
     }
-    
-    return(
+
+    return (
         <div>
             <Drawer />
-        <section id={navBar}>
-            <div id="NavBar__Left__Part">
-                <label for="check">
-                    <input type="checkbox" onClick={ DrawerManager } checked={drawer} id="check"/> 
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
-            </div>
-            <div id="NavBar__Right__Part">
-                <span id="linkedin">
-                    <a rel="noreferrer" href="http://linkedin.com/in/Manoj-Paramsetti" target="_blank"> <img src="https://icons.getbootstrap.com/assets/icons/linkedin.svg" alt="" height = "25px" srcset="" /></a>
-                </span>
-                <span id="Github">
-                    <a rel="noreferrer" href="http://github.com/Manoj-Paramsetti" target="_blank"> <img src="https://icons.getbootstrap.com/assets/icons/github.svg" alt=""  height = "29px" srcset="" /></a>
-                </span>
-            </div>
-        </section>
-            
-            <section style={{height:"128px"}}>
+            <section id={navBar}>
+                <div id="NavBar__Left__Part">
+                    <label for="check">
+                        <input type="checkbox" onClick={DrawerManager} checked={drawer} id="check" />
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                </div>
+                {/* <div id="NavBar__Right__Part">
+                    <span id="linkedin">
+                        <a rel="noreferrer" href="https://www.linkedin.com/in/sakthi-0654b821a/" target="_blank"> <img style={{ marginTop: '5px' }} src="https://icons.getbootstrap.com/assets/icons/linkedin.svg" alt="" height="25px" srcset="" /></a>
+                    </span>
+                    <span id="Github">
+                        <a rel="noreferrer" href="https://github.com/Sakthi51" target="_blank"> <img src="https://icons.getbootstrap.com/assets/icons/github.svg" alt="" height="29px" srcset="" /></a>
+                    </span>
+                </div> */}
+                <div className='navbar-right-part'>
+
+                <div style={{marginTop:'1px'}} className='leetcode_icon'>
+                    <a rel="noreferrer" href="https://leetcode.com/sakthi_/" target="_blank"> <img src="https://cdn.iconscout.com/icon/free/png-512/free-leetcode-3628297-3031905.png?f=avif&w=256" alt="" height="30px" srcset="" /></a>
+                    </div>
+                    <div className='linkedin_icon'>
+                        <a rel="noreferrer" href="https://www.linkedin.com/in/sakthi-0654b821a/" target="_blank"> <img style={{ marginTop: '5px' }} src="https://icons.getbootstrap.com/assets/icons/linkedin.svg" alt="" height="27px" srcset="" /></a>
+                    </div>
+                    <div className='github_icon'>
+                    <a rel="noreferrer" href="https://github.com/Sakthi51" target="_blank"> <img src="https://icons.getbootstrap.com/assets/icons/github.svg" alt="" height="30px" srcset="" /></a>
+                    </div>
+
+
+
+                </div>
+            </section>
+
+            <section style={{ height: "128px" }}>
             </section>
             <section id="Home">
 
                 <section id="img">
                 </section>
                 {'\n'}
-                <h1 style={{ opacity: "0.9"}}><b style={{color : "#ee5253"}}>
-                Hi!</b> This is Paramsetti Manoj
+                <h1 style={{ opacity: "0.9" }}><b style={{ color: "#ee5253" }}>
+                    Hi!</b> This is Sakthi
                 </h1>
-                <p style={{ opacity: "0.7"}}>I love to tc of <b>Security Management</b> and <b>Software Development</b></p>
+                <p style={{ opacity: "0.7" }}>I love to take care of <b>Full stack Software Development</b>.</p>
                 {'\n\n'}
-                <div id="aboutMe" >
-                    <h2 style={{ opacity: "0.9"}}>About Me</h2>
+                <div style={{ fontSize: '15px' }} id="aboutMe" >
+                    <h2 style={{ opacity: "0.9" }}>About Me</h2>
                     {'\n'}
-                    <p style={{ opacity: "0.8", fontFamily: "Work Sans", marginLeft: "auto", marginRight: "auto", maxWidth: "720px",  textAlign: "justify"}}>
-                        I'm pursuing my UG degree in Computer Science and Engineering (2020-2024)
-                        at Sathyabama Institute of Science and Technology (SIST), Chennai, India. 
+                    <p style={{ opacity: "0.8", fontFamily: "Inter", marginLeft: "auto", marginRight: "auto", maxWidth: "720px", textAlign: "justify" }}>
+                        I'm a Full stack developer with a strong foundation in <b>HTML, CSS, and JavaScript</b> . I specialize in modern front-end frameworks like <b>ReactJS and Redux, Redux saga</b>  and have expertise in back-end development with <b>Flask, NodeJS, and ExpressJS</b> , as well as <b>Graphql</b>. My experience also includes <b>SQL</b> and <b>MongoDB databases</b>, as well as version control using <b>Git/GitHub</b>.
                         {'\n\n'}
-                        I like to spend my time on Hackathons, Competitive Programming, developing my apps, bot, and CTF Challenges. Feel free to invite me, If you're looking for a member in Hackathon and CP :D
+                        With a degree in Information Technology from <b>Sathyabama University</b>, I bring a solid understanding of programming concepts and best practices to any project. I'm always looking for opportunities to expand my skills and contribute to exciting web development projects.
                     </p>
-                        {'\n'}
-                        
+                    {'\n'}
+                    
+
                     <h2>Work & Experience</h2>
-                    <p style={{ opacity: "0.8", fontFamily: "Work Sans", marginLeft: "auto", marginRight: "auto", maxWidth: "720px",  textAlign: "justify"}}>
+                    <p style={{ opacity: "0.8", fontFamily: "Inter", marginLeft: "auto", marginRight: "auto", maxWidth: "720px", textAlign: "justify" }}>
                         {'\n'}
-                        - Technical Head at Microsoft Club (SIST)
-                        {'\n'}
-                        - Special Interest Coordinator in Google Developer Student Club (SIST)
-                        {'\n'}
-                        - Frontend developer at TechSnap, India
-                        {'\n'}
-                        - Technical Team Member at Google Developer Student CLub (Season 4) 
+                        I am a full-stack developer with experience working as an <b>intern at Paperflite</b> .As an intern, I was able to work on real-world projects, collaborate with cross-functional teams, and develop my skills.
                         {'\n\n  '}
-                        I'm seeking an internship opportunity 
-                        in software development. Currently, I'm preparing myself for DevSecOps. 
+                        {/* I'm seeking an internship opportunity
+                        in software development. Currently, I'm preparing myself for Full stack web Development.
                         {'\n\n'}
-                        {'\n\n'}
+                        {'\n\n'} */}
                     </p>
-                        You can reach me out on 
-                        <b>
-                            <a rel="noreferrer" href="http://linkedin.com/in/Manoj-Paramsetti" target="_blank" className="LINK">
-                                {''} <u>LinkedIn</u>
-                            </a> 
-                        </b>
-                            {''} and {''}
-                        <b> 
-                            <a target = "_blank" rel="noreferrer" href="https://discord.com/users/777906489498271765">
-                            <u>Discord</u> </a>
-                        </b>
-                            (Manoj Paramsetti#4427) ✨
+                    You can reach me out on
+                    <b>
+                        <a rel="noreferrer" href="https://www.linkedin.com/in/sakthi-0654b821a/" target="_blank" className="LINK">
+                            {''} <u>LinkedIn</u>✨
+                        </a>
+                    </b>
+                    {/* {''} and {''} */}
+                    {/* <b>
+                        <a target="_blank" rel="noreferrer" href="https://discord.com/users/777906489498271765">
+                            <u>Discords</u> </a>
+                    </b> */}
+                    {/* (Sakthi#4427) ✨ */}
 
                     {'\n\n'}
                     Don't forget to check out my <b>
-                        <a rel="noreferrer" href="https://manojparamsetti.vercel.app/technology" target="_blank" className="LINK">
+                        <a rel="noreferrer" href="/technology" target="_blank" className="LINK">
                             <u>Technology</u>
-                        </a></b> and <b><a target = "_blank" rel="noreferrer" href = "https://manojparamsetti.vercel.app/projects"  >
+                        </a></b> and <b><a target="_blank" rel="noreferrer" href="/projects"  >
                             <u>Projects</u>
-                        </a></b> page
-                        {'\n'}
-                        {'\n'}
-                        {'\n'}
-                        <i style={{opacity: 0.3}}>
-                            Last Modified on: 01-01-2022
-                        </i>
+                        </a></b> and <b><a target="_blank" rel="noreferrer" href="https://leetcode.com/sakthi_/"  >
+                            <u>Leetcode profile</u>
+                        </a></b> page.
+                    {'\n'}
+                    {'\n'}
+                    {'\n'}
+                    <i style={{ opacity: 0.3 }}>
+                        Last Modified on: 10-06-2023
+                    </i>
                 </div>
             </section>
         </div>
